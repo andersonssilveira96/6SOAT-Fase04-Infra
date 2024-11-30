@@ -2,18 +2,6 @@ variable "region" {
   default  = "us-east-1"
 }
 
-variable "db_username" {
-  default  = "postgres"
-}
-
-variable "db_password" {
-  default = "postgres"
-}
-
-variable "db_name" {
-  default = "techchallenge"
-}
-
 variable "atlas_public_key" {
   description = "Public key for MongoDB Atlas API."
   type        = string
@@ -34,17 +22,12 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "region" {
-  description = "AWS region for MongoDB Atlas cluster."
-  type        = string
-}
-
-variable "db_username" {
+variable "db_username_mongo" {
   description = "Username for MongoDB database user."
   type        = string
 }
 
-variable "db_password" {
+variable "db_password_mongo" {
   description = "Password for MongoDB database user."
   type        = string
   sensitive   = true

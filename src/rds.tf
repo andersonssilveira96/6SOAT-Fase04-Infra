@@ -1,12 +1,14 @@
-# Recurso para criar o Security Group 
+# Recurso para criar o Security Group
 resource "aws_security_group" "db_sg" {  
   name = "db_sg"
+
   ingress {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"] # Ajuste conforme sua necessidade para mais segurança
   }
+
   egress {
     from_port   = 5432
     to_port     = 5432
@@ -15,17 +17,35 @@ resource "aws_security_group" "db_sg" {
   }
 }
 
-resource "aws_db_instance" "db_sg" {
+# Variáveis para as instâncias
+variable "db_instances" {
+  default = [
+    {
+      db_name     = "techchallenge-pedido"
+      db_username = "postgrespedido"
+      db_password = "postgrespedido"
+    },
+    {
+      db_name     = "techchallenge-producao"
+      db_username = "postgresproducao"
+      db_password = "postgresproducao"
+    }
+  ]
+}
+
+# Criar múltiplas instâncias de RDS usando for_each
+resource "aws_db_instance" "db" {
+  for_each = { for idx, instance in var.db_instances : idx => instance }
 
   engine                 = "postgres"
   engine_version         = "14"
-  db_name                = var.db_name
-  identifier             = var.db_name
+  db_name                = each.value.db_name
+  identifier             = each.value.db_name
   instance_class         = "db.t3.medium"
   allocated_storage      = 20
   publicly_accessible    = true
-  username               = var.db_username
-  password               = var.db_password
+  username               = each.value.db_username
+  password               = each.value.db_password
   vpc_security_group_ids = [aws_security_group.db_sg.id]
   skip_final_snapshot    = true
 
@@ -34,6 +54,6 @@ resource "aws_db_instance" "db_sg" {
   }
 
   tags = {
-    Name = var.db_name
+    Name = each.value.db_name
   }
 }

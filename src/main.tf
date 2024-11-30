@@ -19,6 +19,7 @@ provider "mongodbatlas" {
 
 resource "mongodbatlas_project" "project" {
   name = var.project_name
+  org_id = "6747bd9905b12d07fd142691" 
 }
 
 resource "mongodbatlas_cluster" "cluster" {
@@ -28,6 +29,7 @@ resource "mongodbatlas_cluster" "cluster" {
   provider_region_name = var.region
   cluster_type = "SHARDED"
   mongo_db_major_version = "6.0"
+  provider_instance_size_name = "M10" # Escolha o tamanho da instância (ex.: M10, M20)
 
   replication_specs {
     num_shards = 1
@@ -67,9 +69,9 @@ resource "mongodbatlas_network_container" "network" {
   region_name     = var.region
 }
 
-resource "mongodbatlas_project_ip_whitelist" "whitelist" {
+resource "mongodbatlas_project_ip_access_list" "access_list" {
   project_id = mongodbatlas_project.project.id
-  ip_address = "0.0.0.0/0" # Permite acesso de todos os IPs
+  cidr_block = "0.0.0.0/0" # Permite acesso de qualquer IP
 }
 
 resource "aws_cognito_user_pool" "techchallenge-userspool" {
