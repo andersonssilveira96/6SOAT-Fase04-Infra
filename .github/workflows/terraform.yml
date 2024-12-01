@@ -1,8 +1,6 @@
 name: Deploy RDS Postgres Database 
 on:
- pull_request:
-    types:
-      - closed
+ push:
     branches:
       - master 
 jobs:
