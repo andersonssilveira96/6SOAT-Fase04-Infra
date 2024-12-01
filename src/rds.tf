@@ -21,12 +21,12 @@ resource "aws_security_group" "db_sg" {
 variable "db_instances" {
   default = [
     {
-      db_name     = "techchallenge-pedido"
+      db_name     = "techchallengepedido"
       db_username = "postgrespedido"
       db_password = "postgrespedido"
     },
     {
-      db_name     = "techchallenge-producao"
+      db_name     = "techchallengeproducao"
       db_username = "postgresproducao"
       db_password = "postgresproducao"
     }

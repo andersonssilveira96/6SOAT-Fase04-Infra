@@ -2,6 +2,18 @@ variable "region" {
   default  = "us-east-1"
 }
 
+variable "db_username" {
+  default  = "postgres"
+}
+
+variable "db_password" {
+  default = "postgres"
+}
+
+variable "db_name" {
+  default = "techchallenge"
+}
+
 variable "atlas_public_key" {
   description = "Public key for MongoDB Atlas API."
   type        = string
