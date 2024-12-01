@@ -15,33 +15,26 @@ variable "db_name" {
 }
 
 variable "atlas_public_key" {
-  description = "Public key for MongoDB Atlas API."
-  type        = string
+  default = "gchncaov"
 }
 
 variable "atlas_private_key" {
-  description = "Private key for MongoDB Atlas API."
-  type        = string
+  default = "8c77649c-cadb-475c-b150-28a15f07569a"
 }
 
 variable "project_name" {
-  description = "Name of the MongoDB Atlas project."
-  type        = string
+  default = "techchallengepagamentoproject"
 }
 
 variable "cluster_name" {
-  description = "Name of the MongoDB Atlas cluster."
-  type        = string
+  default = "techchallengepagamentocluster"
 }
 
 variable "db_username_mongo" {
-  description = "Username for MongoDB database user."
-  type        = string
+  default = "admin"
 }
 
 variable "db_password_mongo" {
-  description = "Password for MongoDB database user."
-  type        = string
-  sensitive   = true
+  default = "admin"
 }
 
