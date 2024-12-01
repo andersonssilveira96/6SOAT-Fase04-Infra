@@ -1,6 +1,8 @@
-name: Deploy RDS Postgres Database 
+name: Deploy Infra
 on:
- push:
+ pull_request:
+    types:
+      - closed
     branches:
       - master 
 jobs:
